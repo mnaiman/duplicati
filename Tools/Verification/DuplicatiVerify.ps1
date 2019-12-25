@@ -8,6 +8,7 @@ param
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
+ $WriteProgresChecked = 0
 
 enum RemoteVolumeState
 {
@@ -86,7 +87,13 @@ function Verify-Hashes
                 $errorCount++
             }
         } else {
-            Write-Host "Verifying file $volFileName"
+	
+       #region write-progres
+          #  Write-Host "Verifying file $volFileName"
+          $FilesInFolderCount =   (Get-ChildItem $FileOrDir | Measure-Object ).Count;
+          $WriteProgresChecked ++
+            Write-Progress -Activity "Verifying file: $volFileName" -Status "File $WriteProgresChecked of $FilesInFolderCount  " -PercentComplete ($WriteProgresChecked / $FilesInFolderCount * 100) -Id 1
+            #endregion
 
             $checked++
             $statsState[$($remoteVolume.State)].SumCount += 1
