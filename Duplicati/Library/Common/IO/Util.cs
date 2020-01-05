@@ -22,9 +22,18 @@ namespace Duplicati.Library.Common.IO
     public static class Util
     {
         /// <summary>
+        /// The path directory separator as a char.
+        /// </summary>
+        /// <remarks>
+        /// This only exists so that there is consistency in the codebase with where 
+        /// the directory separator is accessed.
+        /// </remarks>
+        public static readonly char DirectorySeparatorChar = Path.DirectorySeparatorChar;
+
+        /// <summary>
         /// A cached instance of the directory separator as a string
         /// </summary>
-        public static readonly string DirectorySeparatorString = Path.DirectorySeparatorChar.ToString();
+        public static readonly string DirectorySeparatorString = Util.DirectorySeparatorChar.ToString();
 
         public static readonly string AltDirectorySeparatorString = Path.AltDirectorySeparatorChar.ToString();
 
